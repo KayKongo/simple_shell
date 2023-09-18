@@ -1,1 +1,3 @@
-0X016 Simple Shell
+0x16-Simple-Shell
+
+Let's crush this thing.
