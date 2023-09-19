@@ -1,0 +1,49 @@
+.TH SHELL @ "September 19, 2023"  "ALX SWE" "Project 0x16" 
+"C - simple_shell - man page"
+
+.SH NAME
+.B simple_shell
+\- simple UNIX command interpreter written in C 
+
+.SH SYNOPSIS
+.B simple_shell
+[options] [file]
+
+.SH DESCRIPTION
+The
+.B simple_shell
+is a command language interpreter that executes commands read from the standard input.
+It is a clone of the sh shell.
+
+.SH RETURN VALUE
+The shell always returns the status of the previously executed command (0 if no command was executed).
+Non-zero values indicate exit failure codes.
+
+.SH PATH
+The shell looks in the PATH environment variable to locate executable program files.
+
+.SH INVOCATION
+.B simple_shell
+can be invoked both interactively and non-interactively.
+When invoked with standard input not connected to a terminal, it reads and executes received commands in order.
+
+If
+.B simple_shell
+is invoked with standard input connected to a terminal, it opens an interactive shell.
+When executing interactively, the shell displays the prompt "($)" when it is ready to read a command.
+
+.SH OPTIONS
+.B simple_shell
+Command options are typed after the main command, separated by a space and a '-' symbol.
+
+.SH EXAMPLES
+To run a command with options, use the following format:
+.BR ./hsh [command] [options]
+For example:
+.BR $ ls -l
+
+.SH BUGS
+Well, let's find out... 🤣
+
+.SH AUTHORS
+Joycelyn Arhin, Prince Kongo.
