@@ -1,45 +1,62 @@
 #include "shell.h"
 
+
+	char **commands = NULL;
+	char *line = NULL;
+	char *shell_name = NULL;
+	int status = 0;
+
 /**
- * main - The main entry point of the program.
- * @ac: The number of command-line arguments.
- * @av: An array of strings representing the command-line arguments.
+ * main - the chairman shell code itself
+ * @argc: number of arguments (computers must really be tired of counting)
+ * @argv: program arguments to be parsed
  *
- * Return: 0 on success, 1 on error.
+ * applies all the fucntionality of the functions in utils section and guides
+ * implements EOF (End-of-Line)
+ * Prints error when they fail
+ * Return: 0 when there's success (should it have been 1 when successfully rather? Ah well... lol)
  */
-int main(int ac, char **av)
+
+
+int main(int argc __attribute__((unused)), char **argv)
 {
-	info_t info[] = { INFO_INIT };
-	int fd = 2;
+	char **current_command = NULL;
+	int i, type_command = 0;
+	size_t n = 0;
 
-	asm ("mov %1, %0\n\t"
-		"add $3, %0"
-		: "=r" (fd)
-		: "r" (fd));
-
-	if (ac == 2)
+	signal(SIGINT, ctrl_c_handler);
+	shell_name = argv[0];
+	while (1)
 	{
-		fd = open(av[1], O_RDONLY);
-		if (fd == -1)
+		non_interactive();
+		print(" ($) ", STDOUT_FILENO);
+		if (getline(&line, &n, stdin) == -1)
 		{
-			if (errno == EACCES)
-				exit(126);
-			if (errno == ENOENT)
-			{
-				_eputs(av[0]);
-				_eputs(": 0: Can't open ");
-				_eputs(av[1]);
-				_eputchar('\n');
-				_eputchar(BUF_FLUSH);
-				exit(127);
-			}
-			return (EXIT_FAILURE);
+			free(line);
+			exit(status);
 		}
-		info->readfd = fd;
+			remove_newline(line);
+			remove_comment(line);
+			commands = tokenizer(line, ";");
+
+		for (i = 0; commands[i] != NULL; i++)
+		{
+			current_command = tokenizer(commands[i], " ");
+			if (current_command[0] == NULL)
+			{
+				free(current_command);
+				break;
+			}
+			type_command = parse_command(current_command[0]);
+
+			/* start 'em engines if you please   */
+			initializer(current_command, type_command);
+			free(current_command);
+		}
+		free(commands);
 	}
-	populate_env_list(info);
-	read_history(info);
-	hsh(info, av);
-	return (EXIT_SUCCESS);
+	free(line);
+
+	return (status);
 }
 

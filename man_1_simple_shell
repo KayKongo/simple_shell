@@ -1,50 +1,48 @@
-.TH SHELL @ "September 19, 2023"  "ALX SWE" "Project 0x16" 
-"C - simple_shell - man page"
+
+.TH SIMPLE SHELL (The irony of it... you know how hard this was??) "SEPTEMBER 19, 2023"  "ALX SWE Project 0x16_Simple Shel"
+"Simple_Shell in C - Man Page"
 
 .SH NAME
-.B simple_shell
-\- simple UNIX command interpreter written in C 
+.B simple_shell \- simple UNIX command interpreter made in C 
 
 .SH SYNOPSIS
-.B simple_shell
-[options] [file]
+$ /hsh [options] [file]
 
 .SH DESCRIPTION
-The
-.B simple_shell
-is a command language interpreter that executes commands read from the standard input.
-It is a clone of the sh shell.
+Simple_Shell is a command language interpreter that executes commands read from the standard input.
+Clone of sh
 
-.SH RETURN VALUE
-The shell always returns the status of the previously executed command (0 if no command was executed).
-Non-zero values indicate exit failure codes.
+.SH Return Value
+
+Always returns the status of the previously executed command ( 0 if no command was executed) , number means exit fail codes
 
 .SH PATH
-The shell looks in the PATH environment variable to locate executable program files.
 
-.SH INVOCATION
-.B simple_shell
-can be invoked both interactively and non-interactively.
-When invoked with standard input not connected to a terminal, it reads and executes received commands in order.
+looks in PATH env variable for executable program file location.
 
-If
-.B simple_shell
-is invoked with standard input connected to a terminal, it opens an interactive shell.
-When executing interactively, the shell displays the prompt "($)" when it is ready to read a command.
+.SH 
+
+.B Invocation
+.in +2n
+simple_shell can be invoked both interactively and non-interactively.
+If invoked with standard input not connected to a terminal, it reads and executes received commands in order.
+
+If simple_shell is invoked with standard input connected to a terminal, an interactive shell is opened.
+When executing interactively, the simpl_shell displays the prompt \"($) "\ when it is ready to read a command.
 
 .SH OPTIONS
 .B simple_shell
-Command options are typed after the main command, separated by a space and a '-' symbol.
 
-.SH EXAMPLES
-To run a command with options, use the following format:
-.BR ./hsh [command] [options]
-For example:
-.BR $ ls -l
+
+.SH EXAMPLE
+
+./hsh [command] [options]
+$ ls -l
+
 
 .SH BUGS
-Well, let's find out... 🤣
+They better not appear lol..
 
 .SH AUTHORS
-Joycelyn Arhin, Prince Kongo.
+Joycelyn Arhin (She's Cute though), Prince Kongo (He's hot).
 

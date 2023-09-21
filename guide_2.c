@@ -1,12 +1,13 @@
 #include "shell.h"
 
+
 /**
- * _strtok_r - Tokenizes a string.
- * @string: The string to be tokenized.
- * @delim: The delimiter used for tokenization.
- * @save_ptr: A pointer used to keep track of the next token.
+ *_strtok_r - tokenizes a string (so many tokenizing if you ask me)
+ *@string: string tokenized (tokenizing again)
+ *@delim: delimiter to be used
+ *@save_ptr: pointer to be used to track next token or so
  *
- * Return: The next available token.
+ *Return: The next available token
  */
 char *_strtok_r(char *string, char *delim, char **save_ptr)
 {
@@ -41,10 +42,10 @@ char *_strtok_r(char *string, char *delim, char **save_ptr)
 }
 
 /**
- * _atoi - Converts a string to an integer.
- * @s: The string to be converted.
+ * _atoi - changes a string to an integer
+ * @s: the string to be changed
  *
- * Return: The converted integer.
+ * Return: the converted int
  */
 int _atoi(char *s)
 {
@@ -55,7 +56,7 @@ int _atoi(char *s)
 			return (-1);
 		else if ((*s < '0' || *s > '9') && *s != '\0')
 			return (-1);
-		else if (*s >= '0' && *s <= '9')
+		else if (*s >= '0'  && *s <= '9')
 			n = (n * 10) + (*s - '0');
 		else if (n > 0)
 			break;
@@ -64,12 +65,12 @@ int _atoi(char *s)
 }
 
 /**
- * _realloc - Reallocates a memory block.
- * @ptr: Pointer to the memory previously allocated with malloc.
- * @old_size: Size of ptr.
- * @new_size: Size of the new memory to be allocated.
+ * _realloc - reallocates a block (brick lol) of memory
+ * @ptr: pointer to the memory previously allocated 
+ * @old_size: size of ptr
+ * @new_size: new memory size to be allocated
  *
- * Return: Pointer to the address of the new memory block.
+ * Return: pointer to the address of the new memory block
  */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
@@ -100,14 +101,15 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 		}
 		else
 			return (NULL);
+
 	}
 }
 
 /**
- * ctrl_c_handler - Handles the signal raised by CTRL-C.
- * @signum: Signal number.
+ * ctrl_c_handler - handles the signal by CTRL-C (should be funcitonal by now)
+ * @signum: signal number used
  *
- * Return: void.
+ * Return: void
  */
 void ctrl_c_handler(int signum)
 {
@@ -116,10 +118,10 @@ void ctrl_c_handler(int signum)
 }
 
 /**
- * remove_comment - Removes/ignores everything after a '#' character.
- * @input: Input to be processed.
+ * remove_comment - ignores anything after a '#' char input
+ * @input: input  used
  *
- * Return: void.
+ * Return: void
  */
 void remove_comment(char *input)
 {
