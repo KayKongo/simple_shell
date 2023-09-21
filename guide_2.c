@@ -114,7 +114,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 void ctrl_c_handler(int signum)
 {
 	if (signum == SIGINT)
-		printf("\n($) ", STDIN_FILENO);
+		print("\n($) ", STDIN_FILENO);
 }
 
 /**
