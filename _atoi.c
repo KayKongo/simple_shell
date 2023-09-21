@@ -73,3 +73,4 @@ int stringToInteger(char *s)
 
 	return (output);
 }
+

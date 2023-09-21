@@ -18,3 +18,4 @@ int checker(char **cmd, char *buf)
 	}
 	return (0);
 }
+

@@ -28,3 +28,4 @@ void execution(char *cp, char **cmd)
 	else
 		wait(&status);
 }
+

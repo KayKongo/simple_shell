@@ -94,3 +94,4 @@ int _myhelp(info_t *info)
 		_puts(*argArray); /* Temporarily unused workaround */
 	return (0);
 }
+

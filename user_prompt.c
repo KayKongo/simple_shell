@@ -14,3 +14,4 @@ void prompt_user(void)
 	if (flags.interactive)
 		write(STDERR_FILENO, "$ ", 2);
 }
+

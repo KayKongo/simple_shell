@@ -43,3 +43,4 @@ char *path_append(char *path, char *command)
 	buf[i + j] = '\0';
 	return (buf);
 }
+

@@ -135,3 +135,4 @@ void remove_comment(char *input)
 	}
 	input[i] = '\0';
 }
+
