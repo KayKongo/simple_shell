@@ -7,9 +7,9 @@
  */
 
 void non_interactive(void)
-{
+{	
+int i, type_command = 0;
 	char **current_command = NULL;
-	int i, type_command = 0;
 	size_t n = 0;
 
 	if (!(isatty(STDIN_FILENO)))
