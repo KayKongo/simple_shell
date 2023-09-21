@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * tokenizer - tokenizes input into an array
+ * tokenizer - Actually tokenizes input into an array
  *@input_string: input that has to be  parsed
- *@delim: delimiter used
+ *@delim: delimiter used, has to be a string character
  *
  *Return: token arrays
  */
@@ -11,9 +11,9 @@
 char **tokenizer(char *input_string, char *delim)
 {
 	int num_delim = 0;
-	char **av = NULL;
-	char *token = NULL;
 	char *save_ptr = NULL;
+	char *token = NULL;
+	char **av = NULL;
 
 	token = _strtok_r(input_string, delim, &save_ptr);
 
@@ -32,11 +32,11 @@ char **tokenizer(char *input_string, char *delim)
 }
 
 /**
- *print - prints a string to stdout
- *@string: string to be printed
- *@stream: stream to print out to
+ *print - Has to print a string to stdout
+ *@string: The actual string to be printed
+ *@stream: The stream to print out to
  *
- *Return: void, return nothing
+ *Return: void, return absolutely nothing
  */
 void print(char *string, int stream)
 {
@@ -47,8 +47,8 @@ void print(char *string, int stream)
 }
 
 /**
- *remove_newline - removes new line from a string
- *@str: string to be used
+ *remove_newline - Has remove a new line from a string
+ *@str: Actual string to be used
  *
  *
  *Return: void
@@ -68,7 +68,7 @@ void remove_newline(char *str)
 }
 
 /**
- *_strcpy - copies a string into a buffer... I think
+ *_strcpy - Has to copy a string into a buffer... I think
  *@source: source obviously
  *@dest: destination (very self-explanatory)
  *
@@ -85,7 +85,7 @@ void _strcpy(char *source, char *dest)
 }
 
 /**
- *_strlen - how long is the string
+ *_strlen - how long is the string,huh
  *@string: string count
  *
  * Return: string length

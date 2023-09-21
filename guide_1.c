@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- *_strcmp - compare two strings
- *@first: first string compared
- *@second: second string compared
+ *_strcmp - Has to compare two strings
+ *@first: The first string compared
+ *@second: The second string compared
  *
- * Return: difference between both strings
+ * Return: The difference between both strings
  */
 
 int _strcmp(char *first, char *second)
@@ -22,18 +22,18 @@ int _strcmp(char *first, char *second)
 }
 
 /**
- *_strcat - concatenates two strings
- *@destination: string to be concatenated to
- *@source:  string to concatenate
+ *_strcat - Actually concatenates two strings
+ *@destination: The string to be concatenated to
+ *@source:  The string to concatenate
  *
  * Return: address of the new string
  */
 
 char *_strcat(char *destination, char *source)
 {
-	char *new_string =  NULL;
 	int len_dest = _strlen(destination);
 	int len_source = _strlen(source);
+	char *new_string =  NULL;
 
 	new_string = malloc(sizeof(*new_string) * (len_dest + len_source + 1));
 	_strcpy(destination, new_string);
@@ -43,9 +43,9 @@ char *_strcat(char *destination, char *source)
 }
 
 /**
- *_strspn - gets the length of a prefix substring
- *@str1: string to be searched
- *@str2: string to be used
+ *_strspn - Has to get the length of a prefix substring
+ *@str1: The string to be searched
+ *@str2: The string to be used
  *
  *Return: number of bytes in the initial segment of 5 which are part of accept
  */

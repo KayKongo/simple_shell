@@ -106,9 +106,11 @@ char *check_path(char *command)
 
 	if (path == NULL || _strlen(path) == 0)
 		return (NULL);
-	path_cpy = malloc(sizeof(*path_cpy) * (_strlen(path) + 1));
-	_strcpy(path, path_cpy);
-	path_array = tokenizer(path_cpy, ":");
+	path_cpy = malloc((_strlen(path) + 1) * sizeof(char));
+if (path_cpy == NULL) {
+    path_array = tokenizer(path_cpy, ":");
+}
+strcpy(path_cpy, path);
 	for (i = 0; path_array[i] != NULL; i++)
 	{
 		temp2 = _strcat(path_array[i], "/");

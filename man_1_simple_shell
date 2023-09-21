@@ -1,48 +1,58 @@
-
-.TH SIMPLE SHELL (The irony of it... you know how hard this was??) "SEPTEMBER 19, 2023"  "ALX SWE Project 0x16_Simple Shel"
-"Simple_Shell in C - Man Page"
-
+.TH Simple_Shell 1 "SEPTEMBER 19, 2023" "ALX SWE Project 0x16_Simple Shell"
 .SH NAME
-.B simple_shell \- simple UNIX command interpreter made in C 
+.B Simple_Shell \- A simple UNIX command interpreter written in C
 
 .SH SYNOPSIS
-$ /hsh [options] [file]
+.B Simple_Shell
+.RB [ options ]
+.RB [ file ]
 
 .SH DESCRIPTION
-Simple_Shell is a command language interpreter that executes commands read from the standard input.
-Clone of sh
+The
+.B Simple_Shell
+is a command language interpreter that executes commands read from the standard input, designed as a clone of the 'sh' shell.
 
-.SH Return Value
-
-Always returns the status of the previously executed command ( 0 if no command was executed) , number means exit fail codes
+.SH RETURN VALUE
+The shell always returns the status of the previously executed command (0 if no command was executed). Non-zero values indicate exit failure codes.
 
 .SH PATH
+The shell looks in the PATH environment variable to locate executable program files.
 
-looks in PATH env variable for executable program file location.
-
-.SH 
-
-.B Invocation
-.in +2n
-simple_shell can be invoked both interactively and non-interactively.
-If invoked with standard input not connected to a terminal, it reads and executes received commands in order.
-
-If simple_shell is invoked with standard input connected to a terminal, an interactive shell is opened.
-When executing interactively, the simpl_shell displays the prompt \"($) "\ when it is ready to read a command.
+.SH INVOCATION
+.PP
+The
+.B Simple_Shell
+can be invoked both interactively and non-interactively. When invoked with standard input not connected to a terminal, it reads and executes received commands in order.
+.PP
+If
+.B Simple_Shell
+is invoked with standard input connected to a terminal, it opens an interactive shell. When executing interactively, the
+.B Simple_Shell
+displays the prompt
+.B "($) "
+when it is ready to read a command.
 
 .SH OPTIONS
-.B simple_shell
+There are no specific options for the
+.B Simple_Shell.
 
-
-.SH EXAMPLE
-
-./hsh [command] [options]
+.SH EXAMPLES
+.PP
+To run a command using the
+.B Simple_Shell
+interactively, use the following syntax:
+.RS
+.nf
+$ ./hsh [command] [options]
 $ ls -l
-
+.fi
+.RE
 
 .SH BUGS
-They better not appear lol..
+There are currently no known bugs.
 
 .SH AUTHORS
-Joycelyn Arhin (She's Cute though), Prince Kongo (He's hot).
+The
+.B Simple_Shell
+was created by Joycelyn Arhin and Prince Kongo.
 

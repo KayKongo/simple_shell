@@ -19,7 +19,7 @@ void env(char **tokenized_command __attribute__((unused)))
 }
 
 /**
- * quit - exits the shell
+ * quit - departs the shell,obviously
  * @tokenized_command: command input
  *
  * Return: void
@@ -32,10 +32,10 @@ void quit(char **tokenized_command)
 	for (; tokenized_command[num_token] != NULL; num_token++)
 		;
 	if (num_token == 1)
-	{
-		free(tokenized_command);
-		free(line);
+	{		
+free(line);
 		free(commands);
+		free(tokenized_command);
 		exit(status);
 	}
 	else if (num_token == 2)
@@ -51,9 +51,9 @@ void quit(char **tokenized_command)
 		}
 		else
 		{
-			free(line);
+			free(line);	
+		free(commands);
 			free(tokenized_command);
-			free(commands);
 			exit(arg);
 		}
 	}
