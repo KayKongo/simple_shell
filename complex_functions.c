@@ -1,67 +1,96 @@
 #include "shell.h"
 
 /**
- * env - Print the current environment.
- * @tokenized_command: Command entered (unused).
+ * _myexit - Exits the shell.
+ * @info: Pointer to the info_t structure.
  *
- * This function prints the current environment variables to standard output.
- *
- * Return: void.
+ * Return: Exits with a given exit status (0) if info->argv[0] != "exit".
  */
-void env(char **tokenized_command __attribute__((unused)))
+int _myexit(info_t *info)
 {
-    int i;
+	int exitCheck;
 
-    for (i = 0; environ[i] != NULL; i++)
-    {
-        print(environ[i], STDOUT_FILENO);
-        print("\n", STDOUT_FILENO);
-    }
+	if (info->argv[1])  /* If there is an exit argument */
+	{
+		exitCheck = _erratoi(info->argv[1]);
+		if (exitCheck == -1)
+		{
+			info->status = 2;
+			print_error(info, "Illegal number: ");
+			_eputs(info->argv[1]);
+			_eputchar('\n');
+			return (1);
+		}
+		info->err_num = _erratoi(info->argv[1]);
+		return (-2);
+	}
+	info->err_num = -1;
+	return (-2);
 }
 
 /**
- * quit - Exit the shell.
- * @tokenized_command: Command entered.
+ * _mycd - Changes the current directory of the process.
+ * @info: Pointer to the info_t structure.
  *
- * This function allows the user to exit the shell. It handles two cases:
- * 1. If no argument is provided, it exits with the current status.
- * 2. If one argument is provided and it's a valid integer, it exits with that status.
- *
- * Return: void.
+ * Return: Always 0.
  */
-void quit(char **tokenized_command)
+int _mycd(info_t *info)
 {
-    int num_token = 0, arg;
+	char *s, *dir, buffer[1024];
+	int chdirRet;
 
-    for (; tokenized_command[num_token] != NULL; num_token++)
-        ;
+	s = getcwd(buffer, 1024);
+	if (!s)
+		_puts("TODO: >>getcwd failure emsg here<<\n");
+	if (!info->argv[1])
+	{
+		dir = _getenv(info, "HOME=");
+		if (!dir)
+			chdirRet = /* TODO: what should this be? */
+				chdir((dir = _getenv(info, "PWD=")) ? dir : "/");
+		else
+			chdirRet = chdir(dir);
+	}
+	else if (_strcmp(info->argv[1], "-") == 0)
+	{
+		if (!_getenv(info, "OLDPWD="))
+		{
+			_puts(s);
+			_putchar('\n');
+			return (1);
+		}
+		_puts(_getenv(info, "OLDPWD=")), _putchar('\n');
+		chdirRet = /* TODO: what should this be? */
+			chdir((dir = _getenv(info, "OLDPWD=")) ? dir : "/");
+	}
+	else
+		chdirRet = chdir(info->argv[1]);
+	if (chdirRet == -1)
+	{
+		print_error(info, "can't cd to ");
+		_eputs(info->argv[1]), _eputchar('\n');
+	}
+	else
+	{
+		_setenv(info, "OLDPWD", _getenv(info, "PWD="));
+		_setenv(info, "PWD", getcwd(buffer, 1024));
+	}
+	return (0);
+}
 
-    if (num_token == 1)
-    {
-        free(tokenized_command);
-        free(line);
-        free(commands);
-        exit(status);
-    }
-    else if (num_token == 2)
-    {
-        arg = _atoi(tokenized_command[1]);
-        if (arg == -1)
-        {
-            print(shell_name, STDERR_FILENO);
-            print(": 1: exit: Illegal number: ", STDERR_FILENO);
-            print(tokenized_command[1], STDERR_FILENO);
-            print("\n", STDERR_FILENO);
-            status = 2;
-        }
-        else
-        {
-            free(line);
-            free(tokenized_command);
-            free(commands);
-            exit(arg);
-        }
-    }
-    else
-        print("$: exit doesn't take more than one argument\n", STDERR_FILENO);
+/**
+ * _myhelp - Provides help information (not yet implemented).
+ * @info: Pointer to the info_t structure.
+ *
+ * Return: Always 0.
+ */
+int _myhelp(info_t *info)
+{
+	char **argArray;
+
+	argArray = info->argv;
+	_puts("help call works. Function not yet implemented \n");
+	if (0)
+		_puts(*argArray); /* Temporarily unused workaround */
+	return (0);
 }
