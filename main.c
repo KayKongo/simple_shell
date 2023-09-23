@@ -1,63 +1,45 @@
 #include "shell.h"
 
-
-	char *shell_name = NULL;
-	char *line = NULL;
-	char **commands = NULL;
-	int status = 0;
-
-
 /**
- * main - the chairman shell code itself
- * @argc: number of arguments (computers must really be tired of counting)
- * @argv: program arguments to be parsed
+ * main - main
+ * @ac: argument number
+ * @av: argument svg number
  *
- * applies all the functionality of the functions in utils section and guides
- * implements EOF (End-of-Line)
- * Prints error when they fail
- * Return: 0 when there's success (should it have been 1 when successful rather? Ah well... lol)
+ * Return: 0 ? successful : 1
  */
-
-
-int main(int argc __attribute__((unused)), char **argv)
+int main(int ac, char **av)
 {
-	size_t n = 0;
-	int i, type_command = 0;
-	char **current_command = NULL;
+	info_t info[] = { INFO_INIT };
+	int fd = 2;
 
-	shell_name = argv[0];
-	signal(SIGINT, ctrl_c_handler);
-	while (1)
+	asm ("mov %1, %0\n\t"
+		"add $3, %0"
+		: "=r" (fd)
+		: "r" (fd));
+
+	if (ac == 2)
 	{
-		non_interactive();
-		print(" ($) ", STDOUT_FILENO);
-		if (getline(&line, &n, stdin) == -1)
+		fd = open(av[1], O_RDONLY);
+		if (fd == -1)
 		{
-			free(line);
-			exit(status);
-		}
-			commands = tokenizer(line, ";");
-			remove_comment(line);
-			remove_newline(line);
-
-		for (i = 0; commands[i] != NULL; i++)
-		{
-			current_command = tokenizer(commands[i], " ");
-			if (current_command[0] == NULL)
+			if (errno == EACCES)
+				exit(126);
+			if (errno == ENOENT)
 			{
-				free(current_command);
-				break;
+				_eputs(av[0]);
+				_eputs(": 0: Can't open ");
+				_eputs(av[1]);
+				_eputchar('\n');
+				_eputchar(BUF_FLUSH);
+				exit(127);
 			}
-			type_command = parse_command(current_command[0]);
-
-			/* start 'em engines if you please   */
-			initializer(current_command, type_command);
-			free(current_command);
+			return (EXIT_FAILURE);
 		}
-		free(commands);
+		info->readfd = fd;
 	}
-	free(line);
-
-	return (status);
+	populate_env_list(info);
+	read_history(info);
+	hsh(info, av);
+	return (EXIT_SUCCESS);
 }
 
